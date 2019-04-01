@@ -1,0 +1,67 @@
+<div appShadow style="padding :20px">
+	{{ name }}
+</div>
+<hr>
+<div class="container" style="padding :10px" appShadow>
+	<p [appHighlight]="'green'" appConsoleEntry> appConsoleEntry appHighlight Highlight me:: Green!</p>
+	<p appHighlight appConsoleEntry>appConsoleEntry appHighlight Highlight me :: Red!</p>
+</div>
+<hr>
+<div class="container" style="padding :10px">
+	<table align="center" cellpadding="4" cellspacing="4" appShadow>
+		<thead>
+			<tr>
+				<th style="background-color: Yellow;color: blue">color</th>
+				<th style="background-color: Yellow;color: blue">Code</th>
+				<th style="background-color: Yellow;color: blue">Name</th>
+				<th style="background-color: Yellow;color: blue">Gender</th>
+				<th style="background-color: Yellow;color: blue">Annual Salary</th>
+				<th style="background-color: Yellow;color: blue">Date of Birth</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr [appHighlight]="(isFirst)?'gold': (isLast)?'purple':( ( (isEven)?'green':'red'))" *ngFor='let employee of employees;  index as i; even as isEven; odd as isOdd; first as isFirst; last as isLast; trackBy: trackByFn'>
+				<td>{{(isFirst)?' isFirst : gold': (isLast)?'isLast : purple':( ( (isEven)?'isEven : green':'others/odd: red'))}}
+				</td>
+				<td>{{employee.code}}</td>
+				<td>{{employee.name}}</td>
+				<td>{{employee.gender}}</td>
+				<td>{{employee.annualSalary}}</td>
+				<td>{{employee.dateOfBirth}}</td>
+			</tr>
+			<tr *ngIf="!employees || employees.length==0">
+				<td colspan="5">
+					No employees to show in the page....
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<hr>
+<div class="container" style="padding :10px" appShadow>
+	<div class="row" style="padding :10px ">
+		<button [appHighlight]="'green'" appShadow [ngStyle]="getStyle()">Style Attribute Button</button>
+	</div>
+  <div class="row" style="padding :10px ">
+    <button  [appHighlight]="'green'" appShadow [ngClass]='applyClasses()'>Class Attribute Button</button>
+  </div>
+</div>
+<hr>
+<div class="container" style="padding :10px" appShadow>
+	*ngIf ngSwitch ngSwitchDefault<br>
+  <label *ngFor="let radiobutton of radioItems">
+  <input type="radio" name="options" (click)="model.option = radiobutton"
+  [checked]="radiobutton === model.option">{{radiobutton}}
+</label>
+<p>
+  Selected option: {{model.option}}
+</p>
+	<p *ngIf="showElement">Show Element</p>
+	<div [ngSwitch]="model.option" appShadow style="padding:10px"> 
+		<p *ngSwitchCase="'Rafi Sahab'"  [app-highlight-singer]="model.option"> You have selected Rafi sahab</p>
+		<p *ngSwitchCase="'Kishore kumar'"   [app-highlight-singer]="model.option">You have selected Kishore kumar</p>
+		<p *ngSwitchCase="'Lata'"    [app-highlight-singer]="model.option">You have selected Lata Mangeshkar</p>
+		<p *ngSwitchDefault >Sorry! Invalid selection....{{model.option}}</p>
+	</div>
+</div>
